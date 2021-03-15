@@ -1,0 +1,54 @@
+{
+  "saldo": 90,
+  "transacoes": [
+    {
+      "tipo": "SAQUE",
+      "valor": -10,
+      "descricao": "Churrasco de domingo",
+      "atualizadoEm": 1533270651427,
+      "id": 1
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 50,
+      "descricao": "Recebimento salário",
+      "atualizadoEm": 1533270663879,
+      "id": 2
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 10,
+      "descricao": "Dividir pizza com os amigos",
+      "atualizadoEm": 1533399402946,
+      "id": 3
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 10,
+      "descricao": "Vaquinha pro bolo de aniversário",
+      "atualizadoEm": 1533399430175,
+      "id": 4
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 10,
+      "descricao": "Vaquinha pro bolo de aniversário",
+      "atualizadoEm": 1533399444103,
+      "id": 5
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 10,
+      "descricao": "Vaquinha pro bolo de aniversário",
+      "atualizadoEm": 1533399810279,
+      "id": 6
+    },
+    {
+      "tipo": "DEPOSITO",
+      "valor": 10,
+      "descricao": "Dividir pizza com os amigos",
+      "atualizadoEm": 1533400042381,
+      "id": 7
+    }
+  ]
+}
