@@ -11,7 +11,7 @@ import pt from 'date-fns/locale/pt'
 registerLocale('pt', pt)
 
 const DateRangeInput = styled.div`
-    width: 45%;
+    width: 50%;
     display:flex;
     justify-content: space-between;
 `
@@ -21,18 +21,19 @@ const Selector = styled.div`
         padding-right:1rem;
         cursor: pointer;
         .label-calendar-icon{
-            font-size: 3rem;
+            font-size: 3.3rem;
             margin-right: 0.8rem;
+            color: #969696;
         }
         #selector-info-wrapper{
             display:flex;
             flex-direction: column;
             p{
                 margin:0;
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             #date-value{
-                color: #969696
+                color: #666666
             }
         }
         .date-picker{

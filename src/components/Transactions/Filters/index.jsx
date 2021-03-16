@@ -7,18 +7,13 @@ import DescriptionFilter from './Description.jsx'
 import TypeFilter from './Type.jsx'
 
 const FiltersSection = styled.section`
-    #description-date-wrapper{
+    #description-type-wrapper{
         display:flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 2.5rem;    
     }
-    #type-filter{
-        display:flex;
-        align-items:center;
-        flex-direction: row;
-    }
 `
-
 export default function Filters(props){
     function handleSetDescription(event){   
         props.setFilters('description', event.target.value)   
@@ -32,7 +27,7 @@ export default function Filters(props){
     }
     return(
         <FiltersSection>
-            <div id='description-date-wrapper'>
+            <div id='description-type-wrapper'>
                 <DescriptionFilter 
                     setDescription={handleSetDescription} 
                     description={props.filters.description}

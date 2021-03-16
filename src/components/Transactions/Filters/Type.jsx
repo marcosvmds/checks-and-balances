@@ -3,17 +3,19 @@ import React, {useState} from 'react'
 import styled from 'styled-components';
 
 const TypeInput = styled.div`
-    margin-top: 1.5rem;
+    display:flex;
+    align-items:center;
+    flex-direction: row;
     label{
         color: #666666;
         font-size: 1.5rem;
-        margin-right: 1rem;
+        margin-right: 0.5rem;
     }
 `
 export default function TypeFilter(props){
 
     return(
-        <TypeInput id="type-filter" onChange={props.setType}>
+        <TypeInput onChange={props.setType}>
             <input type="radio" id="all" name="type" value="SAQUE DEPOSITO" defaultChecked/>
             <label htmlFor="all">All</label><br/>
 
