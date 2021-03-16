@@ -5,7 +5,9 @@ import styled from 'styled-components'
 import Filters from './Filters'
 import List from './List'
 
-
+const TransactionsSection = styled.div`
+    width: 52%;
+`
 
 export default function Transactions(props){
     const [filtersState, setFiltersState] = useState({
@@ -31,6 +33,3 @@ export default function Transactions(props){
     )
 }
 
-const TransactionsSection = styled.div`
-    width: 52%;
-`

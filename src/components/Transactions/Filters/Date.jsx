@@ -11,7 +11,7 @@ import pt from 'date-fns/locale/pt'
 registerLocale('pt', pt)
 
 const DateRangeInput = styled.div`
-    width: 50%;
+    width: 45%;
     display:flex;
     justify-content: space-between;
 `
@@ -21,15 +21,15 @@ const Selector = styled.div`
         padding-right:1rem;
         cursor: pointer;
         .label-calendar-icon{
-            font-size: 2rem;
-            margin-right: 0.5rem;
+            font-size: 3rem;
+            margin-right: 0.8rem;
         }
         #selector-info-wrapper{
             display:flex;
             flex-direction: column;
             p{
                 margin:0;
-                font-size: 0.8rem;
+                font-size: 1.2rem;
             }
             #date-value{
                 color: #969696
@@ -37,13 +37,13 @@ const Selector = styled.div`
         }
         .date-picker{
             display:none;
+            font-size: 1.6rem;
             height: 1px;
             width: 1px;
         }
     }
    
 `
-const localDate = (date) => date.toLocaleDateString()
 const invert = (date) => {
     const d = date.split('-')
     return [d[1],d[0],d[2]].join('-')

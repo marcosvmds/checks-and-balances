@@ -9,13 +9,13 @@ import CurrencyInput from 'react-currency-input';
 
 const OperationForm = styled.form` 
   width:42%;
-  height: 400px;
+  height: 40rem;
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   border: solid 1px black;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 3.5rem 2rem 3.5rem;
   #trans-value{
     display: flex;
     flex-direction: row;
@@ -23,7 +23,8 @@ const OperationForm = styled.form`
 `
 const Title = styled.h3`
   color: #666666;
-  font-weight:400;
+  font-size: 1.5rem;
+  font-weight:500;
   text-transform: uppercase;
 `
 const ValueInput = styled.div`
@@ -32,22 +33,22 @@ const ValueInput = styled.div`
   width: 80%;
   input{
     width:60%;
-    font-size:1.2rem;
-    padding:0.8rem;
+    font-size:1.6rem;
+    padding:1rem;
   }
 `
 const AmountButton = styled.div`
     border-radius: 50%;
-    width: 2.5rem;
-    line-height: 2.5rem;
-    font-size: 2rem;
+    width: 3.5rem;
+    line-height: 3.5rem;
+    font-size: 2.8rem;
     text-align:center;
-    border: solid 1.5px black;
+    border: solid 0.15rem black;
     cursor: pointer;
 `
 const DescriptionInput = styled.input`
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     padding: 0.5rem;
 `
 const TypeInput = styled.div`
@@ -56,18 +57,21 @@ const TypeInput = styled.div`
     justify-content: space-evenly;
     align-self: flex-start;
     width: 35%;
+    font-size: 1.5rem;
     color: #666666;
+    line-height: 3rem;
     input{
-      margin-right: 1rem
+      margin-right: 1.5rem
     }
 `
 const SubmitButton = styled.input`
-    width:50%;
+    width:45%;
     align-self: flex-start;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     color: #666666;
-    padding: 0.5rem 0.3rem;
-    border: 1px solid #969696;
+    padding: 0.6rem 0.4rem;
+    border: 1.5px solid #969696;
+    background-color:white;
 `
 export default function Operation(props){
 

@@ -3,14 +3,11 @@ import React, {useState} from 'react'
 import styled from 'styled-components';
 
 const TypeInput = styled.div`
-    grid-area: type;
-    margin-top: 1rem;
-    input{
-        
-    }
+    margin-top: 1.5rem;
     label{
-        font-size: 0.8rem;
-        margin-right: 0.5rem;
+        color: #666666;
+        font-size: 1.5rem;
+        margin-right: 1rem;
     }
 `
 export default function TypeFilter(props){

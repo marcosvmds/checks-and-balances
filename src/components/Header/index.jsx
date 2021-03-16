@@ -8,19 +8,20 @@ const Title = styled.header`
     flex-direction:column;
     justify-content: space-around;
     text-align: center;
-    height: 20vh;
-    margin-bottom: 1rem;
+    height: 15vh;
+    margin-bottom: 4rem;
 `
 const MainTitle = styled.h1`
     margin-bottom:0;
-    font-size: 2.5rem;
+    font-size: 4rem;
     font-weight: 400;
+    
 `
 const SubTitle = styled.h2`
     color: #969696;
-    font-size: 1rem;
+    font-size: 1.8rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin:0;
 ` 
 export default function Header(props){
     return(

@@ -7,11 +7,13 @@ import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import PaginationList from 'react-pagination-list';
 
 const TransactionsList = styled.ul`
+    padding: 2rem 0;
+    font-size: 1.7rem;
     list-style: none outside;
-    padding: 0;
-    line-height: 2.5rem;
+    margin-top: 2rem;
+    line-height: 3.5rem;
+    color: #666666;
     background-color: #f9f9f9;
-    margin: 0;
 `
 
 export default function List(props){
@@ -63,7 +65,7 @@ export default function List(props){
             <PaginationList 
                 className='pagination-list'
                 data={transactionsData} 
-                pageSize={6}
+                pageSize={10}
                 renderItem={(item, key)=>itemFormatter(item, key)}
             />
         </TransactionsList>  

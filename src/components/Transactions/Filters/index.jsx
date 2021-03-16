@@ -6,6 +6,19 @@ import DateFilter from './Date.jsx'
 import DescriptionFilter from './Description.jsx'
 import TypeFilter from './Type.jsx'
 
+const FiltersSection = styled.section`
+    #description-date-wrapper{
+        display:flex;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;    
+    }
+    #type-filter{
+        display:flex;
+        align-items:center;
+        flex-direction: row;
+    }
+`
+
 export default function Filters(props){
     function handleSetDescription(event){   
         props.setFilters('description', event.target.value)   
@@ -33,15 +46,3 @@ export default function Filters(props){
         </FiltersSection>    
     )
 }
-const FiltersSection = styled.section`
-    #description-date-wrapper{
-        display:flex;
-        justify-content: space-between;
-        align-items:center;  
-        margin-bottom: 1.5rem;    
-    }
-    #type-filter{
-        display:flex;
-        flex-direction: row;
-    }
-`
