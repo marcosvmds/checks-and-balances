@@ -127,7 +127,7 @@ export default function Operation(props){
             <AmountButton id="value-button" onClick={()=>changeValueByClick('sub')}>-</AmountButton>
         </ValueInput>
         <DescriptionInput id="description" type="text" name="description" 
-            placeholder="Insert description" ref={register}/>
+            placeholder="Insert description"  maxLength="40" ref={register}/>
         <TypeInput id="trans-type" className="form-group">
             <div className="type-input">
                 <input type="radio" id="deposit" name="type" value="DEPOSITO"
