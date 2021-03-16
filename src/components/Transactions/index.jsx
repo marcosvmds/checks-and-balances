@@ -7,6 +7,11 @@ import List from './List'
 
 const TransactionsSection = styled.div`
     width: 52%;
+
+    @media(max-width: 720px){
+        width: 100%;
+        max-width: 40rem;
+    }
 `
 
 export default function Transactions(props){

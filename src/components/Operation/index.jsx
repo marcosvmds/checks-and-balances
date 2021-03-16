@@ -16,9 +16,22 @@ const OperationForm = styled.form`
   justify-content: space-around;
   border: solid 1px black;
   padding: 0 3.5rem 2rem 3.5rem;
+  margin-bottom: 4rem;
+
   #trans-value{
     display: flex;
     flex-direction: row;
+  }
+  @media (max-width: 850px){
+    padding: 0 2.5rem 2rem 2.5rem;
+  }
+  @media(max-width: 720px){
+      width: 100%;
+      max-width: 40rem;
+  }
+  @media(max-width: 320px){
+      width: 100%;
+      max-width: 40rem;
   }
 `
 const Title = styled.h3`
@@ -27,24 +40,36 @@ const Title = styled.h3`
   font-weight:500;
   text-transform: uppercase;
 `
-const ValueInput = styled.div`
-  justify-content: space-evenly;
+const AmountArea = styled.div`
+  justify-content: space-between;
   align-items:center;
-  width: 80%;
+  width: 100%;
+  max-width: 25rem;
   input{
-    width:60%;
+    max-width: 15rem;
     font-size:1.6rem;
     padding:1rem;
+
+    @media(max-width: 320px){
+      width: 12rem;
   }
+  }
+  
 `
 const AmountButton = styled.div`
     border-radius: 50%;
     width: 3.5rem;
     line-height: 3.5rem;
-    font-size: 2.8rem;
     text-align:center;
+    font-size: 2.8rem;
+    font-weight: 200;
     border: solid 0.15rem black;
     cursor: pointer;
+
+    @media(max-width: 320px){
+      width: 3rem;
+      line-height: 3rem;
+    }
 `
 const DescriptionInput = styled.input`
     width: 100%;
@@ -56,7 +81,6 @@ const TypeInput = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-self: flex-start;
-    width: 35%;
     font-size: 1.5rem;
     color: #666666;
     line-height: 3rem;
@@ -118,7 +142,7 @@ export default function Operation(props){
   return(
     <OperationForm onSubmit={handleSubmit(submitTransaction)}>
         <Title>New transaction</Title>
-        <ValueInput id="trans-value" className="form-group">
+        <AmountArea id="trans-value" className="form-group">
             <AmountButton id="value-button" onClick={()=>changeValueByClick('add')}>+</AmountButton>  
             <CurrencyInput name='value'
               ref={register}
@@ -129,7 +153,7 @@ export default function Operation(props){
               onChangeEvent={handleChangeValue}
             />
             <AmountButton id="value-button" onClick={()=>changeValueByClick('sub')}>-</AmountButton>
-        </ValueInput>
+        </AmountArea>
         <DescriptionInput id="description" type="text" name="description" 
             placeholder="Insert description"  maxLength="40" ref={register}/>
         <TypeInput id="trans-type" className="form-group">

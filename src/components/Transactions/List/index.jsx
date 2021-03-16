@@ -19,7 +19,7 @@ const TransactionsList = styled.ul`
 export default function List(props){
     
     const filters = props.filters
-    const transactionsData = listFilter(props.transactionsData,  filters).reverse()
+    const transactionsData = listFilter(props.transactionsData, filters).reverse()
 
     function transTypeIcon(type){
         return (

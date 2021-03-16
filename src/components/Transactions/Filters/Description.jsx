@@ -4,7 +4,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 const DescriptionInput = styled.div`
-    width: 50%;
+    width: 100%;
+    max-width: 30rem;
     position: relative;
     #search-icon{
         position:absolute;
@@ -21,6 +22,9 @@ const DescriptionInput = styled.div`
         &::placeholder{
             color:#969696;
         }
+    }
+    @media(max-width: 1080px){
+        margin-bottom: 2.5rem;
     }
 `
 export default function DescFilter(props){

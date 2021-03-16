@@ -11,14 +11,12 @@ import pt from 'date-fns/locale/pt'
 registerLocale('pt', pt)
 
 const DateRangeInput = styled.div`
-    width: 50%;
     display:flex;
-    justify-content: space-between;
 `
 const Selector = styled.div` 
     label{
         display:flex;
-        padding-right:1rem;
+        padding-right:3rem;
         cursor: pointer;
         .label-calendar-icon{
             font-size: 3.3rem;

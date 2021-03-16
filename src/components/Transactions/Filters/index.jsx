@@ -12,6 +12,11 @@ const FiltersSection = styled.section`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2.5rem;    
+
+        @media(max-width: 1080px){
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 `
 export default function Filters(props){
