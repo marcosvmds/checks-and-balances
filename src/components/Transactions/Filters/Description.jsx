@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 
 const DescriptionInput = styled.input`
-    
     font-size: 1.2rem;
     height:2.5rem;
 `

@@ -1,20 +1,21 @@
 import React, { useState } from "react"
+import moment from 'moment'
 import styled from 'styled-components'
+
 import Filters from './Filters'
 import List from './List'
 
-export default function Transactions(props){
 
+
+export default function Transactions(props){
     const [filtersState, setFiltersState] = useState({
         description:'',
         type:'SAQUE DEPOSITO',
-        startDate: '2000-01-01',
-        endDate: '2022-01-01'
+        startDate: '01-01-2000',
+        endDate: moment().format('DD-MM-YYYY')
     })
-
     function handleSetFilters(filterType, filterValue){
-        const formated = filterValue.replaceAll('/','-')
-        setFiltersState({...filtersState, [filterType]: formated})
+        setFiltersState({...filtersState, [filterType]: filterValue})
     }
     return(
         <TransactionsSection>

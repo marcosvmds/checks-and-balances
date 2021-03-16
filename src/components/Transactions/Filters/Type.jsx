@@ -18,13 +18,13 @@ export default function TypeFilter(props){
     return(
         <TypeInput id="type-filter" onChange={props.setType}>
             <input type="radio" id="all" name="type" value="SAQUE DEPOSITO" defaultChecked/>
-            <label for="all">All</label><br/>
+            <label htmlFor="all">All</label><br/>
 
             <input type="radio" id="deposits" name="type" value="DEPOSITO"/>
-            <label for="deposits">Deposits</label><br/>
+            <label htmlFor="deposits">Deposits</label><br/>
 
             <input type="radio" id="withdraws" name="type" value="SAQUE"/>
-            <label for="withdraws">Withdraws</label><br/>
+            <label htmlFor="withdraws">Withdraws</label><br/>
         </TypeInput> 
     )
 }

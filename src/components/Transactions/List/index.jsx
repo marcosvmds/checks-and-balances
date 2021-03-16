@@ -7,9 +7,11 @@ import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import PaginationList from 'react-pagination-list';
 
 const TransactionsList = styled.ul`
-    list-style: none;
+    list-style: none outside;
+    padding: 0;
     line-height: 2.5rem;
     background-color: #f9f9f9;
+    margin: 0;
 `
 
 export default function List(props){
@@ -28,15 +30,18 @@ export default function List(props){
         const formated = new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL'}).format(value)
         return formated
     }
-    function listFilter(data, filters){
+    function invert(date){
+        const d = date.split('-')
+        return [d[1],d[0],d[2]].join('-')
+    }
+    function listFilter(data, filters){    
         return (
             data.filter((t)=>{
-                const d = new Date(filters.endDate)
                 return (
                     t.descricao.toLowerCase().includes(filters.description.toLowerCase())
                     && filters.type.includes(t.tipo)
-                    && t.atualizadoEm>=Date.parse(filters.startDate)
-                    && t.atualizadoEm<=Date.parse(filters.endDate)
+                    && t.atualizadoEm>=Date.parse(invert(filters.startDate))
+                    && t.atualizadoEm<=Date.parse(invert(filters.endDate))
                 )
             })
         )
@@ -58,7 +63,7 @@ export default function List(props){
             <PaginationList 
                 className='pagination-list'
                 data={transactionsData} 
-                pageSize={7}
+                pageSize={6}
                 renderItem={(item, key)=>itemFormatter(item, key)}
             />
         </TransactionsList>  

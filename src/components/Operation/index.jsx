@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import ReactDom from 'react-dom'
 import styled from 'styled-components'
+import moment from 'moment'
 
 import CurrencyInput from 'react-currency-input';
 
@@ -99,14 +100,16 @@ export default function Operation(props){
     if(type=='add') setValueState('R$'+addVal) 
   }
   function handleChangeValue(e, maskedvalue, floatvalue){
-    const original = floatvalue
     setValueState(maskedvalue) 
   }
   function submitTransaction(register){
-    handleNewTransaction(register.type, register.description, Date.now(), toNumeric(valueState))
+    handleNewTransaction(register.type, register.description, todayMilli(), toNumeric(valueState))
   }
   function toNumeric(value){
       return value.replace(/[\.]/g,'').replace(',','.').slice(2)
+  }
+  function todayMilli(){
+    return Date.parse((moment().format('YYYY-MM-DD'))+'T00:00:00')
   }
   return(
     <OperationForm onSubmit={handleSubmit(submitTransaction)}>

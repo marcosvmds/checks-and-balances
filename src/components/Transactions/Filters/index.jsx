@@ -11,7 +11,8 @@ export default function Filters(props){
         props.setFilters('description', event.target.value)   
     }
     function handleSetDate(name, date){
-        props.setFilters(name, date)   
+        const formated = date.toLocaleDateString().replaceAll('/','-')
+        props.setFilters(name, formated)   
     }
     function handleSetType(event){
         props.setFilters('type',event.target.value)     
@@ -19,25 +20,25 @@ export default function Filters(props){
     return(
         <FiltersSection>
             <div id='description-date-wrapper'>
-                <DateFilter 
-                    setDate={handleSetDate} 
-                    filters={props.filters}
-                />
                 <DescriptionFilter 
                     setDescription={handleSetDescription} 
                     description={props.filters.description}
-                />           
+                />  
+                <TypeFilter setType={handleSetType}/>    
             </div>
-            <TypeFilter setType={handleSetType}/>
-        </FiltersSection>  
-        
+            <DateFilter 
+                    setDate={handleSetDate} 
+                    filters={props.filters}
+            />            
+        </FiltersSection>    
     )
 }
 const FiltersSection = styled.section`
     #description-date-wrapper{
         display:flex;
         justify-content: space-between;
-        align-items:center;      
+        align-items:center;  
+        margin-bottom: 1.5rem;    
     }
     #type-filter{
         display:flex;

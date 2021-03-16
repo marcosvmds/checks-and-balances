@@ -25,7 +25,6 @@ export default function Main(){
   function valueFormater(value){
     return new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL' }).format(value)
   }
-
   return (
     <AppWrapper className="app">
       <Header balance={valueFormater(balanceState)}/>

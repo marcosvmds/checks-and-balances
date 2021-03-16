@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components';
+import moment from 'moment'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCalendar} from '@fortawesome/free-regular-svg-icons';
@@ -9,8 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt'
 registerLocale('pt', pt)
 
-const DateInput = styled.div`
-    width: 45%;
+const DateRangeInput = styled.div`
+    width: 50%;
     display:flex;
     justify-content: space-between;
 `
@@ -18,6 +19,7 @@ const Selector = styled.div`
     label{
         display:flex;
         padding-right:1rem;
+        cursor: pointer;
         .label-calendar-icon{
             font-size: 2rem;
             margin-right: 0.5rem;
@@ -35,38 +37,47 @@ const Selector = styled.div`
         }
         .date-picker{
             display:none;
+            height: 1px;
+            width: 1px;
         }
     }
    
 `
+const localDate = (date) => date.toLocaleDateString()
+const invert = (date) => {
+    const d = date.split('-')
+    return [d[1],d[0],d[2]].join('-')
+}
 function DateSelector(props){ 
-    const name = props.title == 'Start date' ? 'startDate' : 'endDate'  
-    const localDate = (date) => date.toLocaleDateString()
+    const startOrEnd = props.title == 'Start date' ? 'startDate' : 'endDate'  
+    const invertd = invert(props.filters[startOrEnd])
+    const d = new Date(invertd)
+    const selected = Date.parse(d)
     return(
         <Selector>
-            <label htmlFor={name}>
+            <label htmlFor={startOrEnd}>    
                 <FontAwesomeIcon className='label-calendar-icon' 
                     icon={faCalendar}/>
+                 <Datepicker
+                    className='date-picker'
+                    id={startOrEnd}
+                    name={startOrEnd}
+                    selected={selected}  
+                    locale='pt'
+                    dateFormat="dd/MM/yyyy"
+                    onSelect={date=>(props.setDate(startOrEnd, date))}
+                />
                 <div id='selector-info-wrapper'>
                     <p id='date-title'>{props.title}</p>
-                    <p id='date-value'>{props.filters[name]}</p>
-                </div>  
-                
-                <Datepicker
-                    className='date-picker'
-                    id={name}
-                    name={name}
-                    selected={Date.parse(props.filters[name])}
-                    locale="pt"     
-                    onSelect={date=>(props.setDate(name, localDate(date)))}
-                />               
+                    <p id='date-value'>{props.filters[startOrEnd]}</p>
+                </div>                            
             </label>
         </Selector>        
     )
 }
 export default function DateFilter(props){
     return(
-        <DateInput>
+        <DateRangeInput>
             <DateSelector 
                 title={'Start date'} 
                 setDate={props.setDate} 
@@ -77,6 +88,6 @@ export default function DateFilter(props){
                 setDate={props.setDate} 
                 filters={props.filters}
             />
-        </DateInput>   
+        </DateRangeInput>   
     )
 }
