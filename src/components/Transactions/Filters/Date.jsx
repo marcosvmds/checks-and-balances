@@ -34,12 +34,16 @@ const Selector = styled.div`
                 color: #666666
             }
         }
-        .date-picker{
-            display:none;
-            font-size: 1.6rem;
-            height: 1px;
-            width: 1px;
+        #date-picker-container{
+            font-size: 2rem;
+            .date-picker{
+                display:none;
+                font-size: 1.6rem;
+                height: 1px;
+                width: 1px;
+            }
         }
+        
     }
    
 `
@@ -57,15 +61,17 @@ function DateSelector(props){
             <label htmlFor={startOrEnd}>    
                 <FontAwesomeIcon className='label-calendar-icon' 
                     icon={faCalendar}/>
-                 <Datepicker
-                    className='date-picker'
-                    id={startOrEnd}
-                    name={startOrEnd}
-                    selected={selected}  
-                    locale='pt'
-                    dateFormat="dd/MM/yyyy"
-                    onSelect={date=>(props.setDate(startOrEnd, date))}
-                />
+                <div id='date-picker-container'>
+                    <Datepicker
+                        className='date-picker'
+                        id={startOrEnd}
+                        name={startOrEnd}
+                        selected={selected}  
+                        locale='pt'
+                        dateFormat="dd/MM/yyyy"
+                        onChange={date=>(props.setDate(startOrEnd, date))}
+                    />
+                </div>
                 <div id='selector-info-wrapper'>
                     <p id='date-title'>{props.title}</p>
                     <p id='date-value'>{props.filters[startOrEnd]}</p>
