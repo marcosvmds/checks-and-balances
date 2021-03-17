@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import moment from 'moment'
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCalendar} from '@fortawesome/free-regular-svg-icons';
 

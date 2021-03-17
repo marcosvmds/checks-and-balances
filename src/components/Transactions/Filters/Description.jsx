@@ -15,7 +15,7 @@ const DescriptionInput = styled.div`
         font-size: 2rem;
     }
     #description-input{
-        width: 100%;
+        width: 95%;
         height:3.5rem;
         padding-left: 4rem;
         font-size: 1.7rem;

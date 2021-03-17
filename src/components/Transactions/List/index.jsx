@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import ReactDom from 'react-dom'
+import React from 'react'
 import styled from 'styled-components'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -28,7 +27,7 @@ export default function List(props){
         <FontAwesomeIcon icon={faArrowLeft}/>
         )
     }
-    function valueFormater(value, type){
+    function valueFormater(value){
         const formated = new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL'}).format(value)
         return formated
     }
@@ -52,7 +51,8 @@ export default function List(props){
         const typeIcon = transTypeIcon(item.tipo)
         const date = new Date(item.atualizadoEm) 
         const formatedDate = date.toLocaleDateString()
-        const formatedValue = valueFormater(item.valor)
+        const formatedValue = item.tipo == 'SAQUE' ?
+            valueFormater(item.valor*-1) : valueFormater(item.valor)
         return (
             <li key={key}>
                 {typeIcon}

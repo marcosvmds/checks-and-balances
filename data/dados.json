@@ -3,7 +3,7 @@
   "transacoes": [
     {
       "tipo": "SAQUE",
-      "valor": -10,
+      "valor": 10,
       "descricao": "Churrasco de domingo",
       "atualizadoEm": 1533270651427,
       "id": 1

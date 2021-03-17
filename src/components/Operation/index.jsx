@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
-import ReactDom from 'react-dom'
 import styled from 'styled-components'
 import moment from 'moment'
 

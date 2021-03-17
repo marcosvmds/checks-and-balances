@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import ReactDom from 'react-dom'
 import styled from 'styled-components'
 import data from '../../data/dados.json'
 
