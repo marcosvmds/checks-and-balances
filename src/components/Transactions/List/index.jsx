@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import PaginationList from 'react-pagination-list';
 
+import {invertDayMonth, valueFormater} from '../utils.js'
+
 const TransactionsList = styled.ul`
     padding: 2rem 0;
     font-size: 1.7rem;
@@ -27,22 +29,14 @@ export default function List(props){
         <FontAwesomeIcon icon={faArrowLeft}/>
         )
     }
-    function valueFormater(value){
-        const formated = new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL'}).format(value)
-        return formated
-    }
-    function invert(date){
-        const d = date.split('-')
-        return [d[1],d[0],d[2]].join('-')
-    }
     function listFilter(data, filters){    
         return (
             data.filter((t)=>{
                 return (
                     t.descricao.toLowerCase().includes(filters.description.toLowerCase())
                     && filters.type.includes(t.tipo)
-                    && t.atualizadoEm>=Date.parse(invert(filters.startDate))
-                    && t.atualizadoEm<=Date.parse(invert(filters.endDate))
+                    && t.atualizadoEm>=Date.parse(invertDayMonth(filters.startDate))
+                    && t.atualizadoEm<=Date.parse(invertDayMonth(filters.endDate))
                 )
             })
         )

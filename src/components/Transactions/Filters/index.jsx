@@ -5,6 +5,8 @@ import DateFilter from './Date.jsx'
 import DescriptionFilter from './Description.jsx'
 import TypeFilter from './Type.jsx'
 
+import {toLocaleDash} from '../utils.js'
+
 const FiltersSection = styled.section`
     #description-type-wrapper{
         display:flex;
@@ -23,7 +25,7 @@ export default function Filters(props){
         props.setFilters('description', event.target.value)   
     }
     function handleSetDate(name, date){
-        const formated = date.toLocaleDateString().replaceAll('/','-')
+        const formated = toLocaleDash(date)
         props.setFilters(name, formated)   
     }
     function handleSetType(event){

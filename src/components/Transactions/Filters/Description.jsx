@@ -28,7 +28,6 @@ const DescriptionInput = styled.div`
     }
 `
 export default function DescFilter(props){
-    
     return(
         <DescriptionInput>
             <FontAwesomeIcon id='search-icon' icon={faSearch}/>

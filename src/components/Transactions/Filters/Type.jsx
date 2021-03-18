@@ -12,7 +12,6 @@ const TypeInput = styled.div`
     }
 `
 export default function TypeFilter(props){
-
     return(
         <TypeInput onChange={props.setType}>
             <input type="radio" id="all" name="type" value="SAQUE DEPOSITO" defaultChecked/>

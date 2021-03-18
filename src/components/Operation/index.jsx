@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import styled from 'styled-components'
-import moment from 'moment'
 
-import CurrencyInput from 'react-currency-input';
+import Type from './Type.jsx'
+import Description from './Description.jsx'
+import Amount from './Amount.jsx'
 
+import {toNumeric, todayMilli} from './utils.js'
 
 const OperationForm = styled.form` 
   width:42%;
@@ -16,7 +18,6 @@ const OperationForm = styled.form`
   border: solid 1px black;
   padding: 0 3.5rem 2rem 3.5rem;
   margin-bottom: 4rem;
-
   #trans-value{
     display: flex;
     flex-direction: row;
@@ -38,54 +39,6 @@ const Title = styled.h3`
   font-size: 1.5rem;
   font-weight:500;
   text-transform: uppercase;
-`
-const AmountArea = styled.div`
-  justify-content: space-between;
-  align-items:center;
-  width: 100%;
-  max-width: 25rem;
-  input{
-    max-width: 15rem;
-    font-size:1.6rem;
-    padding:1rem;
-
-    @media(max-width: 320px){
-      width: 12rem;
-  }
-  }
-  
-`
-const AmountButton = styled.div`
-    border-radius: 50%;
-    width: 3.5rem;
-    line-height: 3.5rem;
-    text-align:center;
-    font-size: 2.8rem;
-    font-weight: 200;
-    border: solid 0.15rem black;
-    cursor: pointer;
-
-    @media(max-width: 320px){
-      width: 3rem;
-      line-height: 3rem;
-    }
-`
-const DescriptionInput = styled.input`
-    width: 100%;
-    font-size: 1.6rem;
-    padding: 0.5rem;
-`
-const TypeInput = styled.div`
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-self: flex-start;
-    font-size: 1.5rem;
-    color: #666666;
-    line-height: 3rem;
-    input{
-      margin-right: 1.5rem
-    }
 `
 const SubmitButton = styled.input`
     width:45%;
@@ -132,43 +85,18 @@ export default function Operation(props){
   function submitTransaction(register){
     handleNewTransaction(register.type, register.description, todayMilli(), toNumeric(valueState))
   }
-  function toNumeric(value){
-      return value.replace(/[\.]/g,'').replace(',','.').slice(2)
-  }
-  function todayMilli(){
-    return Date.parse((moment().format('YYYY-MM-DD'))+'T00:00:00')
-  }
   return(
     <OperationForm onSubmit={handleSubmit(submitTransaction)}>
         <Title>New transaction</Title>
-        <AmountArea id="trans-value" className="form-group">
-            <AmountButton id="value-button" onClick={()=>changeValueByClick('add')}>+</AmountButton>  
-            <CurrencyInput name='value'
-              ref={register}
-              prefix='R$' 
-              thousandSeparator='.' 
-              decimalSeparator=','
-              value={valueState}
-              onChangeEvent={handleChangeValue}
-            />
-            <AmountButton id="value-button" onClick={()=>changeValueByClick('sub')}>-</AmountButton>
-        </AmountArea>
-        <DescriptionInput id="description" type="text" name="description" 
-            placeholder="Insert description"  maxLength="40" ref={register}/>
-        <TypeInput id="trans-type" className="form-group">
-            <div className="type-input">
-                <input type="radio" id="deposit" name="type" value="DEPOSITO"
-                  ref={register} defaultChecked/>
-                <label htmlFor="deposit">Deposit</label><br/>
-            </div>
-            <div className="type-input">
-                <input type="radio" id="withdraw " name="type" value="SAQUE"
-                  ref={register}/>
-                <label htmlFor="withdraw">Withdraw</label><br/>
-            </div>
-        </TypeInput>
+        <Amount register={register} 
+          balance={props.balance}
+          valueState={valueState}
+          changeValue={handleChangeValue}
+          changeValueByClick={changeValueByClick}
+        />    
+        <Description register={register}/>
+        <Type register={register}/>
         <SubmitButton type="submit" id="trans-submit" value="Register"/>
-
     </OperationForm>
   )
 }
