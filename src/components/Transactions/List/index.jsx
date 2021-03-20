@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import PaginationList from 'react-pagination-list';
 
 import {invertDayMonth, valueFormater} from '../utils.js'

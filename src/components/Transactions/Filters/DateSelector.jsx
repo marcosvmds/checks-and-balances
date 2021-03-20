@@ -8,6 +8,7 @@ registerLocale('pt', pt)
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCalendar} from '@fortawesome/free-regular-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import {invertDayMonth} from '../utils.js'
 
