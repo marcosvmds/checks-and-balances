@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 
+import {useAccountContext} from '../../../context/account'
+
 const Title = styled.header`
     display:flex;
     flex-direction:column;
@@ -33,12 +35,20 @@ const SubTitle = styled.h2`
       font-size: 1.3rem;
     }
 ` 
-export default function Header(props){
+function toBrlCurrency(value){
+	return new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL' }).format(value)
+}
+
+export default function Header(){
+	const {accountState} = useAccountContext()
+  console.log("HEADER Rendering with balanceState -> "+accountState.balanceState)
+	const formatedBalance = toBrlCurrency(accountState.balanceState)
     return(
-      <Title>
-        <MainTitle>Checks and Balances</MainTitle>
-        <SubTitle>Your current balance is {props.balance}</SubTitle>
-      </Title>
+			<Title>
+				<MainTitle>Checks and Balances</MainTitle>
+				<SubTitle>Your current balance is {formatedBalance}</SubTitle>
+      		</Title>
+		
     )   
 }
 

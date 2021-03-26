@@ -10,3 +10,6 @@ export function valueFormater(value){
     const formated = new Intl.NumberFormat('br-BR', { style: 'currency', currency: 'BRL'}).format(value)
     return formated
 }
+export function getDateMilliValue(date){
+    return Date.parse(invertDayMonth(date))
+}

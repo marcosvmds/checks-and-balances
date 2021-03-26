@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import CurrencyInput from 'react-currency-input';
 
-
 const AmountButton = styled.div`
     border-radius: 50%;
     width: 3.5rem;
@@ -35,18 +34,21 @@ const AmountSelectWrapper = styled.div`
 export default function Amount(props){
     return(
         <AmountSelectWrapper id="trans-value" className="form-group">
-            <AmountButton id="value-button" 
+            <AmountButton 
+                id="value-button" 
                 onClick={()=>props.changeValueByClick('add')}>+
-            </AmountButton>  
-                <CurrencyInput name='value'
+            </AmountButton>              
+                <CurrencyInput 
+                    name='value'
                     ref={props.register}
                     prefix='R$' 
                     thousandSeparator='.' 
                     decimalSeparator=','
-                    value={props.valueState}
+                    value={props.amountState}
                     onChangeEvent={props.changeValue}
                 />
-            <AmountButton id="value-button"
+            <AmountButton 
+                id="value-button"
                 onClick={()=>props.changeValueByClick('sub')}>-         
             </AmountButton>
         </AmountSelectWrapper>

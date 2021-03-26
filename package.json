@@ -13,6 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "axios": "^0.21.1",
     "js-datepicker": "^5.18.0",
     "moment": "^2.29.1",
     "next": "10.0.8",

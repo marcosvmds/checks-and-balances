@@ -14,13 +14,13 @@ const TypeInput = styled.div`
 export default function TypeFilter(props){
     return(
         <TypeInput onChange={props.setType}>
-            <input type="radio" id="all" name="type" value="SAQUE DEPOSITO" defaultChecked/>
+            <input type="radio" id="all" name="type" value="withdraw deposit" defaultChecked/>
             <label htmlFor="all">All</label><br/>
 
-            <input type="radio" id="deposits" name="type" value="DEPOSITO"/>
+            <input type="radio" id="deposits" name="type" value="deposit"/>
             <label htmlFor="deposits">Deposits</label><br/>
 
-            <input type="radio" id="withdraws" name="type" value="SAQUE"/>
+            <input type="radio" id="withdraws" name="type" value="withdraw"/>
             <label htmlFor="withdraws">Withdraws</label><br/>
         </TypeInput> 
     )

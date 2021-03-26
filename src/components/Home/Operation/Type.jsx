@@ -18,12 +18,12 @@ export default function Type(props){
     return(
         <TypeWrapper id="trans-type" className="form-group">
             <div className="type-input">
-                <input type="radio" id="deposit" name="type" value="DEPOSITO"
+                <input type="radio" id="deposit" name="type" value="deposit"
                 ref={props.register} defaultChecked/>
                 <label htmlFor="deposit">Deposit</label><br/>
             </div>
             <div className="type-input">
-                <input type="radio" id="withdraw " name="type" value="SAQUE"
+                <input type="radio" id="withdraw " name="type" value="withdraw"
                 ref={props.register}/>
                 <label htmlFor="withdraw">Withdraw</label><br/>
             </div>
