@@ -18,10 +18,12 @@ const AmountButton = styled.div`
     }
 `
 const AmountSelectWrapper = styled.div`
+    display: flex;
+	flex-direction: row;
     justify-content: space-between;
     align-items:center;
     width: 100%;
-    max-width: 25rem;
+    max-width: 25rem;		
     input{
         max-width: 15rem;
         font-size:1.6rem;
@@ -36,7 +38,7 @@ export default function Amount(props){
         <AmountSelectWrapper id="trans-value" className="form-group">
             <AmountButton 
                 id="value-button" 
-                onClick={()=>props.changeValueByClick('add')}>+
+                onClick={()=>props.handleChangeAmountByClick('add')}>+
             </AmountButton>              
                 <CurrencyInput 
                     name='value'
@@ -45,11 +47,11 @@ export default function Amount(props){
                     thousandSeparator='.' 
                     decimalSeparator=','
                     value={props.amountState}
-                    onChangeEvent={props.changeValue}
+                    onChangeEvent={props.handleChangeAmount}
                 />
             <AmountButton 
                 id="value-button"
-                onClick={()=>props.changeValueByClick('sub')}>-         
+                onClick={()=>props.handleChangeAmountByClick('sub')}>-         
             </AmountButton>
         </AmountSelectWrapper>
     )

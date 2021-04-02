@@ -41,7 +41,7 @@ function toBrlCurrency(value){
 
 export default function Header(){
 	const {accountState} = useAccountContext()
-  console.log("HEADER Rendering with balanceState -> "+accountState.balanceState)
+  console.log("HEADER/>")
 	const formatedBalance = toBrlCurrency(accountState.balanceState)
     return(
 			<Title>

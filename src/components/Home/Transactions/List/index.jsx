@@ -60,7 +60,6 @@ export default function List(props){
     }
     const filters = props.filters
     const transactionsFilteredData = listFilter(accountState.listState, filters).reverse() 
-
     return (
         <TransactionsList>
             <PaginationList 
