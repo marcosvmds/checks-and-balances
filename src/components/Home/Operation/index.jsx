@@ -108,7 +108,7 @@ export default function Operation() {
 			<SubmitButton 
 				type="submit" 
 				id="trans-submit" 
-				value="Register" 
+				defaultValue="Register" 
 				style={{alignSelf: "flex-start"}} 
 			/>
 		</FormWrapper>

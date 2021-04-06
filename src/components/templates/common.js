@@ -36,6 +36,7 @@ const SubmitButton = styled.input`
     padding: 0.6rem 0.4rem;
     border: 1.5px solid #969696;
     background-color:white;
+	cursor: pointer;
 `
 const StyledLink = styled.a`
 	font-size: 1.5rem;
