@@ -47,7 +47,7 @@ export default function Amount(props){
                     thousandSeparator='.' 
                     decimalSeparator=','
                     value={props.amountState}
-                    onChangeEvent={props.handleChangeAmount}
+                    onChangeEvent={props.changeAmount}
                 />
             <AmountButton 
                 id="value-button"

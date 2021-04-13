@@ -1,12 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 
 import Header from './Header'
 import Operation from './Operation'
 import Transactions from './Transactions'
-
-import {useAccountContext} from '../../context/account'
-
 
 
 const AppWrapper = styled.div`
@@ -36,17 +33,17 @@ const Manager = styled.div`
   }
 `
 
-export default function Home(){ 
-  const {accountState} = useAccountContext()
-	console.log('HOME/>')
-  console.log(accountState)
+export default function Home(props){ 
+
+    console.log('HOME/>')
+
   	return (
 		<AppWrapper className="app">
-				<Header/>
-				<Manager>
-					<Operation/>
-					<Transactions/>
-				</Manager>
+			<Header/>
+			<Manager>
+				<Operation setPage={props.setPage}/>
+				<Transactions/>
+			</Manager>
 		</AppWrapper>
   	)
 }

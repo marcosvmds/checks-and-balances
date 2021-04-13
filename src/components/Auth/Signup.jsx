@@ -21,17 +21,22 @@ export function Signup(props){
     
     const { register, handleSubmit } = useForm()
 
-    function handleRegisterUser(newUserData){
-        api.post('signup', newUserData)
-            .then(registerSuccess)
-            .catch(err => console.log(err))
+    async function handleRegisterUser(newUserData){
+        await api.post('signup', newUserData)
+            .then(res => {
+                console.log(res)
+                registerSuccess(res.data)}) 
+            .catch(err => {
+                registerFail(err)})
     }
-    function registerSuccess(res){
-        console.log(res)
+    function registerSuccess(msg){
+        console.log("entrou no reg sucess?")
+        alert(msg)
         props.setPage("login")
     }
-    function handleRegisterUse(data){
-        console.log(data)
+    function registerFail(err){
+        console.log("entrou no reg fail?")
+        alert(err.response.data)
     }
     return (
         <AppWrapper>
@@ -39,13 +44,13 @@ export function Signup(props){
                 <Title>Create account</Title>
                 <div className="inputs-wrapper">
                     <Input name="name" ref={register} type="text" 
-                        placeholder="Insert your name" />
+                        placeholder="Insert your name" required/>
                     <Input name="email" ref={register} type="e-mail" 
-                        placeholder="Insert your e-mail" />
+                        placeholder="Insert your e-mail" required/>
                     <Input name="password" ref={register} type="password" 
-                        placeholder="Insert your password" />
+                        placeholder="Insert your password" required/>
                     <Input name="passwordConfirm" ref={register} type="password" 
-                        placeholder="Repeat password" />
+                        placeholder="Repeat password" required/>
                 </div>
                 <SubmitButton type="submit" defaultValue="Register"/>
             </FormWrapper>

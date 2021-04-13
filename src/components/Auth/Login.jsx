@@ -1,12 +1,10 @@
-import React, {useState} from 'react'
+import React, {memo, useState, useEffect} from 'react'
 import styled from 'styled-components'
-import Link from 'next/link'
+import { useCookies } from "react-cookie"
 
 import {FormWrapper, Title, SubmitButton, StyledLink, Input} from '../templates/common'
 import {useAccountContext} from '../../context/account'
 import api from '../../services/api'
-import { propTypes } from 'react-currency-input'
-
 
 const AppWrapper = styled.div`
   height: 100vh;
@@ -20,9 +18,12 @@ const AppWrapper = styled.div`
   }
 `
 
-export function Login(props){
-    
-    const {accountState ,setAccountState} = useAccountContext()
+function Login(props){
+
+    console.log("LOGIN PAGE>>>")
+
+    const {userTokenCookie, setAccountState} = useAccountContext()
+    const [cookies, setCookie, removeCookie] = useCookies([userTokenCookie])
 
     const [userData, setUserData] = useState({
         email: '',
@@ -44,35 +45,51 @@ export function Login(props){
     async function handleLogin(){
         await api.post("signin", userData)
             .then(res => loginSuccess(res.data))
-            .catch(err => console.log(err))
+            .catch(err => loginFail(err))
     }
 
-    async function loginSuccess(accountData){
-        console.log('loginSuccess???????????')
-        const accountId = accountData.id
-        const accountBalance = accountData.balance
-        const accountTransactions = await api.get(`transactions/${accountId}`)
-            .then(transactions => transactions.data)
+    function loginSuccess(accountData){
+        //accountData = {payload, token, transactions}
+        console.log('loginSuccess')
 
-        console.log(accountBalance)
-        console.log(accountTransactions)
+        const token = accountData.token
 
-        await setAccountState({
+        const payload = accountData.payload
+        const accountTransactions = accountData.transactions
+
+        const accountId = payload.id
+        const accountBalance = payload.balance
+        const userEmail = payload.sub
+
+        api.defaults.headers.common['Authorization'] = `bearer ${token}`
+
+        setCookie(userTokenCookie, JSON.stringify({token, payload}), {
+            path: "/",
+            sameSite:true
+        })
+
+        console.log("antes de setar acc state")
+
+        setAccountState({
+            accountId,
             listState: accountTransactions,
             balanceState: accountBalance
         })
-        
+
+        console.log("setou acc state")
         props.setPage("home")
     }   
-    function loginFail(error){
-        console.log(error)
+
+    function loginFail(err){
+        console.log("login error")
+        console.log(err)
     } 
+
     return (
         <AppWrapper>
             <FormWrapper>
                 <Title>Access your account</Title>
                 <div className="inputs-wrapper">
-
                     <Input type="e-mail" name="email" 
                         placeholder="Insert your e-mail"
                         value={userData.email}
@@ -92,3 +109,6 @@ export function Login(props){
         </AppWrapper>
     )
 }
+
+export default memo(Login)
+

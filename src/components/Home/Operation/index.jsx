@@ -12,10 +12,10 @@ import {toNumeric} from './utils.js'
 
 import {FormWrapper, Title, SubmitButton} from '../../templates/common'
 
-export default function Operation() {
+export default function Operation(props) {
 	console.log('OPERATION/>')
 	
-	const {accId, accountState, setAccountState} = useAccountContext()
+	const {accountState, setAccountState} = useAccountContext()
 	const { register, handleSubmit } = useForm()
 	const [amountState, setAmountState] = useState('')
 
@@ -26,6 +26,7 @@ export default function Operation() {
 		
 		setAccountState((()=>{
 				return {
+					...accountState,
 					balanceState: newBalanceState,
 					listState: newListState
 				}
@@ -34,21 +35,23 @@ export default function Operation() {
 		console.log('OPERATION Account states updated... (updateAppState)')
 	}
 	async function updateDataBase(newTransaction, newBalance){
-		await api.post('transactions', newTransaction)
-			.then(res=>{
-				console.log("OPERATION New transaction sucessfully regitered in DB API... (handleNewTransaction)")
-			})
-			.catch(err=>console.log(err))	
+		try{
+			await api.post('transactions', newTransaction)
+				.then(res=>{
+					console.log("OPERATION New transaction sucessfully regitered in DB API... (handleNewTransaction)")
+				})
 
-		await api.patch(`accounts/${accId}`, {balance: newBalance})
-			.then(res=>{
-				console.log("OPERATION New balance sucessfully updated in DB API... (handleNewTransaction)")
-			})
-			.catch(err=>console.log(err))
-	}
-	function updateData(newTransaction, newBalance){
-		updateDataBase(newTransaction, newBalance)
-		updateAppState(newTransaction, newBalance)
+			await api.patch(`accounts/${accountState.accountId}`, {balance: newBalance})
+				.then(res=>{
+					console.log("OPERATION New balance sucessfully updated in DB API... (handleNewTransaction)")
+				})
+			updateAppState(newTransaction, newBalance)
+		}
+		catch(err){
+			alert(err)
+			props.setPage("login")
+		}
+		
 	}
 	function handleChangeAmountByClick(type) {
 		const numericValue = Number(toNumeric(amountState))
@@ -58,6 +61,7 @@ export default function Operation() {
 		if (type == 'add') setAmountState('R$' + addVal)
 	}
 	function handleChangeAmount(event, maskedvalue, floatvalue) {
+		console.log(maskedvalue)
 		setAmountState(maskedvalue)
 	}
 	async function handleSubmitTransaction(register) {
@@ -70,6 +74,7 @@ export default function Operation() {
 		)
 	}
 	async function handleNewTransaction(type, desc, date, amount){
+		
 		console.log('OPERATION (handleNewTransaction)...')
 		if (amount <= 0) {
 			alert('Invalid amount')
@@ -84,7 +89,7 @@ export default function Operation() {
 			}  
 		}
 		const newTrans = {
-			"accountId": accId,
+			"accountId": accountState.accountId,
 			"type": type,
 			"amount": Number(amount),
 			"description": desc,
@@ -92,7 +97,7 @@ export default function Operation() {
 		}	
 		const newBal = Number(accountState.balanceState) + Number(newTrans.amount)
 		
-		updateData(newTrans, newBal)
+		updateDataBase(newTrans, newBal)
 	}
 	return (
 		<FormWrapper onSubmit={handleSubmit(handleSubmitTransaction)}>
@@ -100,7 +105,7 @@ export default function Operation() {
 			<Amount 
 				register={register}
 				amountState={amountState}
-				changeValue={handleChangeAmount}
+				changeAmount={handleChangeAmount}
 				handleChangeAmountByClick={handleChangeAmountByClick}
 			/>
 			<Description register={register} />
