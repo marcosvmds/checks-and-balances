@@ -5,7 +5,6 @@ import Header from './Header'
 import Operation from './Operation'
 import Transactions from './Transactions'
 
-
 const AppWrapper = styled.div`
   height: 100vh;
   display: flex;
@@ -39,7 +38,7 @@ export default function Home(props){
 
   	return (
 		<AppWrapper className="app">
-			<Header/>
+			<Header setPage={props.setPage}/>
 			<Manager>
 				<Operation setPage={props.setPage}/>
 				<Transactions/>

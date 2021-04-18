@@ -19,40 +19,6 @@ export default function Operation(props) {
 	const { register, handleSubmit } = useForm()
 	const [amountState, setAmountState] = useState('')
 
-	function updateAppState(newTransactionObj, newBalanceState){
-
-		console.log('OPERATION Setting new account state... (updateAppState)')
-		const newListState = [...accountState.listState, newTransactionObj]
-		
-		setAccountState((()=>{
-				return {
-					...accountState,
-					balanceState: newBalanceState,
-					listState: newListState
-				}
-			})()	
-		)
-		console.log('OPERATION Account states updated... (updateAppState)')
-	}
-	async function updateDataBase(newTransaction, newBalance){
-		try{
-			await api.post('transactions', newTransaction)
-				.then(res=>{
-					console.log("OPERATION New transaction sucessfully regitered in DB API... (handleNewTransaction)")
-				})
-
-			await api.patch(`accounts/${accountState.accountId}`, {balance: newBalance})
-				.then(res=>{
-					console.log("OPERATION New balance sucessfully updated in DB API... (handleNewTransaction)")
-				})
-			updateAppState(newTransaction, newBalance)
-		}
-		catch(err){
-			alert(err)
-			props.setPage("login")
-		}
-		
-	}
 	function handleChangeAmountByClick(type) {
 		const numericValue = Number(toNumeric(amountState))
 		const addVal = (numericValue + 10).toString().replace('.', ',')
@@ -66,16 +32,16 @@ export default function Operation(props) {
 	}
 	async function handleSubmitTransaction(register) {
 		console.log('OPERATION New transaction form submit... (handleSubmitTransaction)')
-		await handleNewTransaction(
+		await newTransaction(
 			register.type, 
 			register.description, 
 			moment().format('YYYY-MM-DD'), 
 			toNumeric(amountState)
 		)
 	}
-	async function handleNewTransaction(type, desc, date, amount){
+	async function newTransaction(type, desc, date, amount){
 		
-		console.log('OPERATION (handleNewTransaction)...')
+		console.log('OPERATION (newTransaction)...')
 		if (amount <= 0) {
 			alert('Invalid amount')
 			return
@@ -99,6 +65,41 @@ export default function Operation(props) {
 		
 		updateDataBase(newTrans, newBal)
 	}
+	async function updateDataBase(newTransaction, newBalance){
+		try{
+			await api.post('transactions', newTransaction)
+				.then(res=>{
+					console.log("OPERATION New transaction sucessfully regitered in DB API... (newTransaction)")
+				})
+
+			await api.patch(`accounts/${accountState.accountId}`, {balance: newBalance})
+				.then(res=>{
+					console.log("OPERATION New balance sucessfully updated in DB API... (newTransaction)")
+				})
+			updateAppState(newTransaction, newBalance)
+		}
+		catch(err){
+			alert("Please signin again")
+			props.setPage("login")
+		}
+	}
+	function updateAppState(newTransactionObj, newBalanceState){
+
+		console.log('OPERATION Setting new account state... (updateAppState)')
+		const newListState = [...accountState.listState, newTransactionObj]
+		
+		setAccountState((()=>{
+				return {
+					...accountState,
+					balanceState: newBalanceState,
+					listState: newListState
+				}
+			})()	
+		)
+		console.log('OPERATION Account states updated... (updateAppState)')
+	}
+	
+	
 	return (
 		<FormWrapper onSubmit={handleSubmit(handleSubmitTransaction)}>
 			<Title>New transaction</Title>

@@ -17,13 +17,12 @@ const AppWrapper = styled.div`
       margin-bottom: 1.5rem;
   }
 `
-
 function Login(props){
 
     console.log("LOGIN PAGE>>>")
 
     const {userTokenCookie, setAccountState} = useAccountContext()
-    const [cookies, setCookie, removeCookie] = useCookies([userTokenCookie])
+    const [cookies, setCookie] = useCookies([userTokenCookie])
 
     const [userData, setUserData] = useState({
         email: '',
@@ -45,7 +44,7 @@ function Login(props){
     async function handleLogin(){
         await api.post("signin", userData)
             .then(res => loginSuccess(res.data))
-            .catch(err => loginFail(err))
+            .catch(err => loginFail(err.response.data))
     }
 
     function loginSuccess(accountData){
@@ -65,7 +64,7 @@ function Login(props){
 
         setCookie(userTokenCookie, JSON.stringify({token, payload}), {
             path: "/",
-            sameSite:true
+            sameSite: true
         })
 
         console.log("antes de setar acc state")
@@ -82,7 +81,7 @@ function Login(props){
 
     function loginFail(err){
         console.log("login error")
-        console.log(err)
+        alert(err)
     } 
 
     return (

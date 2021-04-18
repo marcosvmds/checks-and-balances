@@ -6,18 +6,22 @@ import { CookiesProvider } from "react-cookie"
 import Home from '../components/Home'
 import Login from '../components/Auth/Login'
 import {Signup} from '../components/Auth/Signup'
-import {Loading} from '../components/Auth/Loading'
 import api from '../services/api'
 import {useAccountContext} from '../context/account'
 
 export async function getServerSideProps({req, res}){
 	console.log("GET SERVER SIDE PROPS: USER COOKIES")
-	if(req.headers.cookie){
+	if(req.headers.cookie ){
 		console.log("Has cookies on headers")
 		const cookies = cookie.parse(req ? req.headers.cookie || "" : document.cookie)
 		const userCookie =  cookies.__account_user_token
-		const loggedUser = await cookieVerify(userCookie).then()
-		return { props: { loggedUser }}
+		if(userCookie != "undefined"){
+			const loggedUser = await cookieVerify(userCookie).then()
+			return { props: { loggedUser }}
+		} else {
+			console.log("Invalid cookie")
+			return { props: {loggedUser: false}}
+		}
 	} 
 	else {
 		console.log("No cookie on headers")
