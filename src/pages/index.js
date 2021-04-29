@@ -58,7 +58,7 @@ export default function index({loggedUser}){
 	console.log("INDEXXXXXX")
 	const [pageState, setPageState] = useState('login')
 	console.log("Page state: "+pageState)
-
+	console.log("API URL: "+ process.env.API_URL)
 	const page = () =>{
 		if(loggedUser){
 			console.log("Login with verified cookie")

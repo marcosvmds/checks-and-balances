@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const baseURL = process.env.API_URL || "localhost:3001"
+const baseURL = process.env.API_URL
 
 const api = axios.create({
-    baseURL: "https://checks-and-balances.herokuapp.com/"
+    baseURL
 })
 
 console.log(baseURL)
